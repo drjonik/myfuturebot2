@@ -44,7 +44,7 @@ async def reminder(message: types.Message):
 
 async def send_reminders():
     while True:
-        now = datetime.now()
+        now = datetime.utcnow() + timedelta(hours=3)  # Московское время (GMT+3)
         check_time = (now + timedelta(minutes=30)).strftime("%H:%M")
         weekday = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"][now.weekday()]
         async with aiosqlite.connect("journal.db") as db:
